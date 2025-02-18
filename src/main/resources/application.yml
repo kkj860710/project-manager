@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: projectManager
+  profiles:
+    active: local
+  sql:
+    init:
+      mode: never
+
+
