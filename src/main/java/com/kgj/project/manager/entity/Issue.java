@@ -19,34 +19,33 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "tb_issue")
-@EntityListeners(IssueEntityListener.class)
+@EntityListeners(IssueEntityListener.class) // 엔티티 리스너 설정 추가
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Issue extends BaseEntity{
+public class Issue extends BaseEntity {
 
     @Id
-    private String issueId; // ex) ISSUE202502180001
+    private String issueId;                             // 이슈 고유 ID (ex: ISSUE202502180001)
 
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
+    private Project project;                            // 이슈가 속한 프로젝트 (외래 키)
 
     @Column(nullable = false)
-    private String title;
+    private String title;                               // 이슈 제목
 
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String description;                         // 이슈 상세 설명 (긴 텍스트 저장 가능)
 
     @Enumerated(EnumType.STRING)
-    private IssueStatus status; // TODO, IN_PROGRESS, DONE
+    private IssueStatus status;                         // 이슈 상태 (TODO, IN_PROGRESS, DONE)
 
     @Enumerated(EnumType.STRING)
-    private PriorityLevel priority; // LOW, MEDIUM, HIGH, CRITICAL
+    private PriorityLevel priority;                     // 이슈 우선순위 (LOW, MEDIUM, HIGH, CRITICAL)
 
     @ManyToOne
     @JoinColumn(name = "assigned_to")
-    private User assignedTo;
-
+    private User assignedTo;                            // 이슈 담당자 (외래 키, Nullable)
 }

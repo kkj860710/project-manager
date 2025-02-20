@@ -24,18 +24,18 @@ import lombok.Setter;
 public class User extends BaseEntity {
 
     @Id
-    private String userId; // ex) USER202502180001
+    private String userId;                      // 사용자 고유 ID (ex: USER202502180001)
+   
+    @Column(unique = true, nullable = false)
+    private String username;                    // 사용자 이름 (ex: "john_doe")
 
     @Column(unique = true, nullable = false)
-    private String username;
-
-    @Column(unique = true, nullable = false)
-    private String email;
+    private String email;                       // 사용자 이메일 (ex: "john@example.com"), 로그인시 사용
 
     @Column(nullable = false)
-    private String passwordHash;
+    private String passwordHash;                // 암호화된 비밀번호 저장 (보안 목적)
 
     @Enumerated(EnumType.STRING)
-    private UserRole role; // ADMIN, MEMBER, READ_ONLY
+    private UserRole role;                      // 사용자 역할 (ADMIN, MEMBER, READ_ONLY)
 
 }

@@ -7,4 +7,12 @@ spring:
     init:
       mode: never
 
+# swagger 설정
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /api-test
+    groups-order: desc
+    tags-sorter: alpha
 

@@ -17,21 +17,14 @@ public abstract class BaseEntity {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt;                // 데이터 생성 날짜 (자동 설정)
 
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;                // 데이터 수정 날짜 (자동 설정)
 
     @Column(nullable = false, updatable = false)
-    private String createdBy; // 생성한 사용자 ID
+    private String createdBy;                       // 생성한 사용자 ID (ex: "USER202502180001")
 
-    private String updatedBy; // 업데이트한 사용자 ID
+    private String updatedBy;                       // 마지막으로 데이터를 수정한 사용자 ID
 
-    /**
-     * ID 생성 로직 (YYYYMMDD + 0001 순차 증가)
-     */
-    public static String generateSequentialId(String prefix, int sequence) {
-        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        return prefix + date + String.format("%04d", sequence);
-    }
 }
