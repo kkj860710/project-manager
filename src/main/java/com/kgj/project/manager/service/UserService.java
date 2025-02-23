@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,37 +17,52 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final Bcrypt bcrypt;
 
-    public User getUserByUserLoginId(UserDto userDto) {
-        User getUser = new User();
+    public UserDto getUserByUserLoginId(UserDto userDto) {
+        UserDto returnDto = new UserDto();
         User user = userRepository.findByEmail(userDto.getEmail());
-        if (user != null) {
-            if (bcrypt.isMatch(userDto.getPassword(), user.getPasswordHash())) {
-                getUser = user;
-            }
+        if (user != null && bcrypt.isMatch(userDto.getPassword(), user.getPasswordHash())) {
+            String userRole = String.valueOf(user.getRole());
+            returnDto.setEmail(user.getEmail());
+            returnDto.setUsername(user.getUsername());
+//            returnDto.setPassword(user.getPasswordHash());
+            returnDto.setRole(userRole);
         } else {
-            getUser = null;
+            returnDto = null;
         }
-        return getUser;
+        return returnDto;
     }
 
-
-
-    public User createUser(UserDto user) {
+    public UserDto createUser(UserDto userDto) {
+        UserDto returnDto = new UserDto();
         User createdUser = new User();
-        List<User> userList = userRepository.findAll();
-        if( userList.isEmpty() ) {
+        if (userRepository.count() == 0) {
             createdUser.setRole(UserRole.ADMIN);
         } else {
-            createdUser.setRole(UserRole.valueOf(user.getRole()));
+            try {
+                createdUser.setRole(
+                        Optional.ofNullable(userDto.getRole())
+                                .filter(role -> !role.isEmpty())
+                                .map(UserRole::valueOf)
+                                .orElse(UserRole.MEMBER)
+                );
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("잘못된 역할(Role) 값이 입력되었습니다: " + userDto.getRole());
+            }
         }
 
-        createdUser.setPasswordHash(bcrypt.encrypt(user.getPassword()));
-        createdUser.setEmail(user.getEmail());
-        createdUser.setUsername(user.getUsername());
-        return userRepository.save(createdUser);
-    }
+        createdUser.setPasswordHash(bcrypt.encrypt(userDto.getPassword()));
+        createdUser.setEmail(userDto.getEmail());
+        createdUser.setUsername(userDto.getUsername());
 
+        User savedUser = userRepository.save(createdUser);
+
+        returnDto.setEmail(savedUser.getEmail());
+        returnDto.setUsername(savedUser.getUsername());
+//        returnDto.setPassword(savedUser.getPasswordHash());
+        returnDto.setRole(String.valueOf(savedUser.getRole()));
+
+        return returnDto;
+    }
 }
