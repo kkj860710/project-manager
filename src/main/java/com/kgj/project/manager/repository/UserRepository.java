@@ -12,4 +12,5 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT COUNT(u) FROM User u  WHERE u.userId LIKE :prefix%")
     int getNextSequence(@Param("prefix") String prefix);
 
+    User findByEmail(String email);
 }

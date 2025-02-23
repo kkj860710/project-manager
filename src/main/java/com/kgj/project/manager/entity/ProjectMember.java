@@ -2,6 +2,7 @@ package com.kgj.project.manager.entity;
 
 import com.kgj.project.manager.entity.enums.UserRole;
 import com.kgj.project.manager.entity.listener.ProjectMemberEntityListener;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
@@ -27,6 +28,7 @@ import lombok.Builder;
 public class ProjectMember extends BaseEntity {
 
     @Id
+    @Column(name = "project_member_id", nullable = false)
     private String projectMemberId;                     // 프로젝트 멤버 고유 ID (ex: PROJECTMEMBERID202502180001)
 
     @ManyToOne

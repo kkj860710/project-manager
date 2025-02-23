@@ -27,6 +27,7 @@ import lombok.Setter;
 public class Issue extends BaseEntity {
 
     @Id
+    @Column(name="issue_id")
     private String issueId;                             // 이슈 고유 ID (ex: ISSUE202502180001)
 
     @ManyToOne

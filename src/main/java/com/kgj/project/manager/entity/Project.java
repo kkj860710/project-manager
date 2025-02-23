@@ -25,6 +25,7 @@ import lombok.Setter;
 public class Project extends BaseEntity {
 
     @Id
+    @Column(name="project_id")
     private String projectId;                   // 프로젝트 고유 ID (ex: PROJECT202502180001)
 
     @Column(nullable = false)

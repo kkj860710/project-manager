@@ -23,6 +23,7 @@ import lombok.Setter;
 public class Comment extends BaseEntity {
 
     @Id
+    @Column(name ="comment_id", nullable = false)
     private String commentId;                           // 댓글 고유 ID (ex: COMMENT202502180001)
 
     @ManyToOne

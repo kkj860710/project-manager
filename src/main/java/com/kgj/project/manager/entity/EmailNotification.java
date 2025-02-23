@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 public class EmailNotification extends BaseEntity {
 
     @Id
+    @Column(name = "email_notification_id", nullable = false)
     private String emailNotificationId;                 // 이메일 알림 고유 ID (ex: EMAILNOTIFICATION202502180001)
 
     @ManyToOne

@@ -2,6 +2,7 @@ package com.kgj.project.manager.entity;
 
 import com.kgj.project.manager.entity.enums.ChangeType;
 import com.kgj.project.manager.entity.listener.IssueHistoryEntityListener;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
@@ -27,6 +28,7 @@ import lombok.Setter;
 public class IssueHistory extends BaseEntity {
 
     @Id
+    @Column(name = "issue_history_id", nullable = false)
     private String issueHistoryId;                      // 이슈 변경 기록 고유 ID (ex: ISSUEHISTORY202502180001)
 
     @ManyToOne
@@ -34,9 +36,12 @@ public class IssueHistory extends BaseEntity {
     private Issue issue;                                // 변경된 이슈 (외래 키)
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "change_type")
     private ChangeType changeType;                      // 변경 유형 (STATUS_CHANGE, ASSIGNEE_CHANGE, PRIORITY_CHANGE, COMMENT_ADDED)
 
+    @Column(name="old_value")
     private String oldValue;                            // 변경 이전 값
 
+    @Column(name="new_value")
     private String newValue;                            // 변경 이후 값
 }
