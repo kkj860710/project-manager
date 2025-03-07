@@ -23,7 +23,7 @@ public class IssueEntityListener {
     public void prePersist(Issue issue) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int sequence = issueRepository.getNextSequence("ISSUE") + 1;
-        issue.setIssueId("ISSUEID" + date + String.format("%04d", sequence));
+        issue.setIssueId("ISSUE" + date + String.format("%04d", sequence));
     }
 
 }

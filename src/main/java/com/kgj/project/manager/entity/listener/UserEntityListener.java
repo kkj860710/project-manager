@@ -23,6 +23,6 @@ public class UserEntityListener {
     public void prePersist(User user) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int sequence = userRepository.getNextSequence("USER") + 1;
-        user.setUserId("USERID" + date + String.format("%04d", sequence));
+        user.setUserId("USER" + date + String.format("%04d", sequence));
     }
 }

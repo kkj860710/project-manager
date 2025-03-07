@@ -23,7 +23,7 @@ public class ProjectEntityListener {
     public void prePersist(Project project) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int sequence = projectRepository.getNextSequence("PROJECT") + 1;
-        project.setProjectId("PROJECTID" + date + String.format("%04d", sequence));
+        project.setProjectId("PROJECT" + date + String.format("%04d", sequence));
     }
 
 }

@@ -23,7 +23,7 @@ public class ProjectMemberEntityListener {
     public void prePersist(ProjectMember projectMember) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         int sequence = projectMemberRepository.getNextSequence("PROJECT_MEMBER_ID") + 1;
-        projectMember.setProjectMemberId("PROJECTMEMBERID" + date + String.format("%04d", sequence));
+        projectMember.setProjectMemberId("PROJECTMEMBER" + date + String.format("%04d", sequence));
     }
 
 }

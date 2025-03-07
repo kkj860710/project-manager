@@ -29,7 +29,7 @@ public class ProjectMember extends BaseEntity {
 
     @Id
     @Column(name = "project_member_id", nullable = false)
-    private String projectMemberId;                     // 프로젝트 멤버 고유 ID (ex: PROJECTMEMBERID202502180001)
+    private String projectMemberId;                     // 프로젝트 멤버 고유 ID (ex: PROJECTMEMBER202502180001)
 
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
