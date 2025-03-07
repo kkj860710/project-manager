@@ -1,7 +1,6 @@
 package com.kgj.project.manager.controller;
 
 import com.kgj.project.manager.dto.UserDto;
-import com.kgj.project.manager.entity.User;
 import com.kgj.project.manager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,10 +30,9 @@ public class UserController {
         log.info("getUser: {}", userDto);
         UserDto user = userService.getUserByUserLoginId(userDto);
         if(user == null) {
-            return ResponseEntity.ofNullable(null);
-        } else {
-            return ResponseEntity.ok(user);
+            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(user);
     }
 
 }

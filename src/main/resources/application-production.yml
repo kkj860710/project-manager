@@ -15,8 +15,8 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://15.157.67.109:3306/project_manager?characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
+    url: jdbc:mariadb://localhost:3306/project_manager?characterEncoding=UTF-8&serverTimezone=UTC
+    username: kkj
     password: 1q2w3e4r
   jpa:
     defer-datasource-initialization: true
