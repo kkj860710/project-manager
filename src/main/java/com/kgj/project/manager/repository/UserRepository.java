@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     int getNextSequence(@Param("prefix") String prefix);
 
     User findByEmail(String email);
+
+    User findByUserId(String userId);
+
 }

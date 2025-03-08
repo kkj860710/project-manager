@@ -24,8 +24,14 @@ public class IssueHistoryEntityListener {
     @PrePersist
     public void prePersist(IssueHistory issueHistory) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        int sequence = issueHistoryRepository.getNextSequence("ISSUEHISTORY") + 1;
-        issueHistory.setIssueHistoryId("ISSUEHISTORY" + date + String.format("%04d", sequence));
+        if(issueHistoryRepository !=null) {
+            int sequence = issueHistoryRepository.getNextSequence("ISSUEHISTORY") + 1;
+            issueHistory.setIssueHistoryId("ISSUEHISTORY" + date + String.format("%04d", sequence));
+        } else {
+//            int sequence = issueHistoryRepository.getNextSequence("ISSUEHISTORY") + 1;
+            issueHistory.setIssueHistoryId("ISSUEHISTORY" + date + String.format("%04d", 1));
+        }
+
     }
 
 }

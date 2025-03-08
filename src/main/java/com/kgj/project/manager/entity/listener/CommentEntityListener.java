@@ -22,8 +22,12 @@ public class CommentEntityListener {
     @PrePersist
     public void prePersist(Comment comment) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        int sequence = commentRepository.getNextSequence("COMMENT") + 1;
-        comment.setCommentId("COMMENT" + date + String.format("%04d", sequence));
+        if(commentRepository !=null){
+            int sequence = commentRepository.getNextSequence("COMMENT") + 1;
+            comment.setCommentId("COMMENT" + date + String.format("%04d", sequence));
+        } else {
+            comment.setCommentId("COMMENT" + date + String.format("%04d", 1));
+        }
     }
 
 }

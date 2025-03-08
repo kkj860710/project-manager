@@ -22,7 +22,12 @@ public class EmailNotificationEntityListener {
     @PrePersist
     public void prePersist(EmailNotification emailNotification) {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        int sequence = emailNotificationRepository.getNextSequence("EMAILNOTIFICATION") + 1;
-        emailNotification.setEmailNotificationId("EMAILNOTIFICATION" + date + String.format("%04d", sequence));
+        if(emailNotificationRepository != null) {
+            int sequence = emailNotificationRepository.getNextSequence("EMAILNOTIFICATION") + 1;
+            emailNotification.setEmailNotificationId("EMAILNOTIFICATION" + date + String.format("%04d", sequence));
+        } else {
+            emailNotification.setEmailNotificationId("EMAILNOTIFICATION" + date + String.format("%04d", 1));
+        }
+
     }
 }
