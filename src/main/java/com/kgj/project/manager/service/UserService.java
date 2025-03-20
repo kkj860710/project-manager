@@ -26,6 +26,7 @@ public class UserService {
             String userRole = String.valueOf(user.getRole());
             returnDto.setEmail(user.getEmail());
             returnDto.setUsername(user.getUsername());
+            returnDto.setUserId(user.getUserId());
 //            returnDto.setPassword(user.getPasswordHash());
             returnDto.setRole(userRole);
         } else {
@@ -60,6 +61,7 @@ public class UserService {
 
         returnDto.setEmail(savedUser.getEmail());
         returnDto.setUsername(savedUser.getUsername());
+        returnDto.setUserId(savedUser.getUserId());
 //        returnDto.setPassword(savedUser.getPasswordHash());
         returnDto.setRole(String.valueOf(savedUser.getRole()));
 

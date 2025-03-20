@@ -10,15 +10,12 @@ public class UserDto {
 
     private String email;
 
+    private String userId;
+
     private String password;
 
     private String username;
 
     private String role;
 
-//    public UserDto(String email, String username, String role) {
-//        this.email = email;
-//        this.username = username;
-//        this.role = role;
-//    }
 }
