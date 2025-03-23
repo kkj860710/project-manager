@@ -1,6 +1,5 @@
 package com.kgj.project.manager.dto;
 
-import com.kgj.project.manager.entity.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 

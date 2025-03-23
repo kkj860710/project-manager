@@ -2,6 +2,7 @@ package com.kgj.project.manager.service;
 
 import com.kgj.project.manager.bcrypt.Bcrypt;
 import com.kgj.project.manager.dto.UserDto;
+import com.kgj.project.manager.dto.UserResponseDto;
 import com.kgj.project.manager.entity.User;
 import com.kgj.project.manager.entity.enums.UserRole;
 import com.kgj.project.manager.repository.UserRepository;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -67,4 +70,18 @@ public class UserService {
 
         return returnDto;
     }
+
+
+    public List<UserResponseDto> getAllUser () {
+        List<User> userList = userRepository.findAll();
+        List<UserResponseDto> userResponseDtoList = new ArrayList<>();
+        for(User user : userList) {
+            UserResponseDto userResponseDto = new UserResponseDto();
+            userResponseDto.setUsername(user.getUsername());
+            userResponseDto.setUserId(user.getUserId());
+            userResponseDtoList.add(userResponseDto);
+        }
+        return userResponseDtoList;
+    }
+
 }
